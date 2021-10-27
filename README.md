@@ -3,9 +3,26 @@
 [![Docker stars](https://img.shields.io/docker/stars/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server)
 # Satisfactory Dedicated Server in a Docker Container
 
-_This is still extremely early and undocumented, but if you know what you're doing and have beefy enough hardware, this image might be for you. More information will be available as soon as possible._
+Note that the dedicated server is still in early development, so expect bugs, as well as potentially high memory and storage usage. These are up to the developer to fix or improve upon.
 
-***WARNING:*** _As of right now, there is no data persistence set up, but as this is a high priority feature it will be coming soon! In the meantime, you can try mounting `/steamcmd/satisfactory` to at least persist the installation._
+Be sure to use `didstopia/satisfactory-server:latest` as the tag, so you're always up to date.
+For those of you who prefer it, as well as know how to deal with the persistence changes, a "full installation" tag is also available as `didstopia/satisfactory-server:full`, which bundles the entire dedicated server in the image.
+
+---
+
+Mountable paths:
+```sh
+# NOTE: The following container paths can and should be
+#       mounted on your host system, to ensure that you
+#       don't have to reinstall the server and that your
+#       save games or custom configs are safe.
+
+# Server installation path
+/steamcmd/satisfactory
+
+# Save game files
+/app/.config
+```
 
 Available environment variables:
 ```sh
@@ -23,5 +40,3 @@ SATISFACTORY_BRANCH="experimental"
 # 2 - Skip update checks on startup and start the server
 SATISFACTORY_START_MODE="0"
 ```
-
-Note that the actual dedicated server is still in early development, so the dedicated server will be buggy and has reasonably high memory and storage requirements. These are up to the developer to fix or improve upon.
