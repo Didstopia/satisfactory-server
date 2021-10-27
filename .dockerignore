@@ -1,0 +1,6 @@
+*.log
+satisfactory_data*
+.DS_Store
+docker_*.sh
+.git/
+.git*

@@ -1,0 +1,6 @@
+@sSteamCmdForcePlatformType linux
+login anonymous
+force_install_dir /steamcmd/satisfactory
+app_info_update 1
+app_update 1690800 validate
+quit

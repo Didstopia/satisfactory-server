@@ -1,0 +1,3 @@
+FROM didstopia/satisfactory-server:latest
+
+RUN bash -eo pipefail -c "/steamcmd/steamcmd.sh +runscript /app/install.txt"
