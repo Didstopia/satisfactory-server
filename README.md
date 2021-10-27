@@ -1,8 +1,11 @@
+[![Docker Automated build](https://img.shields.io/docker/automated/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server/)
+[![Docker stars](https://img.shields.io/docker/stars/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server)
 # Satisfactory Dedicated Server in a Docker Container
 
 _This is still extremely early and undocumented, but if you know what you're doing and have beefy enough hardware, this image might be for you. More information will be available as soon as possible._
 
-***WARNING:*** _As of right now, there is no data persistence set up, but as this is a high priority feature it will be coming soon!_
+***WARNING:*** _As of right now, there is no data persistence set up, but as this is a high priority feature it will be coming soon! In the meantime, you can try mounting `/steamcmd/satisfactory` to at least persist the installation._
 
 Available environment variables:
 ```sh
