@@ -90,8 +90,7 @@ cd /steamcmd/satisfactory
 echo "Starting Satisfactory.."
 /steamcmd/satisfactory/Engine/Binaries/Linux/UE4Server-Linux-Shipping \
   $SATISFACTORY_STARTUP_COMMAND \
-  $SATISFACTORY_SERVER_QUERY_PORT \
-  &
+  -ServerQueryPort=$SATISFACTORY_SERVER_QUERY_PORT &
 
 child=$!
 wait "$child"

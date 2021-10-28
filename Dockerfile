@@ -5,14 +5,6 @@ LABEL maintainer="Didstopia <support@didstopia.com>"
 # Fix apt-get warnings
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      expect \
-      tcl \
-      libsdl2-2.0-0 && \
-    rm -rf /var/lib/apt/lists/*
-
 # Create the volume directories
 RUN mkdir -p /steamcmd/satisfactory
 
