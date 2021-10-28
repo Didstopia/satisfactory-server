@@ -3,10 +3,14 @@
 [![Docker stars](https://img.shields.io/docker/stars/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server)
 # Satisfactory Dedicated Server in a Docker Container
 
-Note that the dedicated server is still in early development, so expect bugs, as well as potentially high memory and storage usage. These are up to the developer to fix or improve upon.
+This image provides a dedicated server for Satisfactory, designed to run on top of linux and Docker.  
+As with all of our other game server images, this is based on our custom base images, which have provided known good, stable and secure images for many years.  
+Likewise, this image also automatically updates on [Docker Hub](https://hub.docker.com/r/didstopia/satisfactory-server) whenever our base images change, which can happen on a daily basis if important dependency or security updates are detected by our fully automated system.
 
-Be sure to use `didstopia/satisfactory-server:latest` as the tag, so you're always up to date.
-For those of you who prefer it, as well as know how to deal with the persistence changes, a "full installation" tag is also available as `didstopia/satisfactory-server:full`, which bundles the entire dedicated server in the image.
+Note that the dedicated server itself is still in early development, so expect bugs, as well as potentially high memory and storage usage. These are primarily up to the developer to fix and improve upon.
+
+Finally, be sure to always use `didstopia/satisfactory-server:latest` as the image tag, as otherwise you won't get updates on subsequent pulls.  
+For those who prefer it, as well as know how to deal with the persistence changes, a "full installation" tag is also available as `didstopia/satisfactory-server:full`, which bundles the entire dedicated server in the image.
 
 ---
 
