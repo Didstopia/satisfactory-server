@@ -10,6 +10,38 @@ For those of you who prefer it, as well as know how to deal with the persistence
 
 ---
 
+## Requirements
+
+- Linux
+- Docker
+- A relatively powerful x86 CPU
+- 4 GB of memory (minimum)
+- 10 GB of storage (minimum)
+
+## Quick Start
+
+```sh
+# Update to the latest version
+docker pull didstopia/satisfactory-server:latest
+
+# Start the server
+docker run \
+    -it \
+    --restart=always \
+    --name satisfactory-server \
+    -v satisfactory-data:/steamcmd/satisfactory \
+    -v satisfactory-saves:/app/.config \
+    -p 7777:7777/udp \
+    -p 15000:15000/udp \
+    -p 15777:15777/udp \
+    didstopia/satisfactory-server:latest
+
+# Press CTRL-C to gracefully shut down the server,
+# or replace `-it` with `-d` to run it in background
+```
+
+## Advanced Configuration
+
 Mountable paths:
 ```sh
 # NOTE: The following container paths can and should be
@@ -39,4 +71,8 @@ SATISFACTORY_BRANCH="experimental"
 # 1 - Check for updates on startup and do not start server (container exits/terminates)
 # 2 - Skip update checks on startup and start the server
 SATISFACTORY_START_MODE="0"
+
+# Steam query port, same as the port used in-game
+# NOTE: Can be changed if hosting multiple instances on the same server
+SATISFACTORY_SERVER_QUERY_PORT="15777"
 ```

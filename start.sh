@@ -21,6 +21,9 @@ exit_handler()
 # Trap specific signals and forward to the exit handler
 trap 'exit_handler' SIGINT SIGTERM
 
+# Satisfactory includes a 64-bit version of steamclient.so, so we need to tell the OS where it exists
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/steamcmd/satisfactory/linux64
+
 # Define the install/update function
 install_or_update()
 {
@@ -77,8 +80,6 @@ if [ "$SATISFACTORY_START_MODE" = "1" ]; then
 	exit
 fi
 
-## FIXME: How do we handle data persistence?
-
 # Remove extra whitespace from startup command
 SATISFACTORY_STARTUP_COMMAND=$(echo "$SATISFACTORY_SERVER_STARTUP_ARGUMENTS" | tr -s " ")
 
@@ -87,7 +88,11 @@ cd /steamcmd/satisfactory
 
 # Run the server
 echo "Starting Satisfactory.."
-/steamcmd/satisfactory/Engine/Binaries/Linux/UE4Server-Linux-Shipping $SATISFACTORY_STARTUP_COMMAND &
+/steamcmd/satisfactory/Engine/Binaries/Linux/UE4Server-Linux-Shipping \
+  $SATISFACTORY_STARTUP_COMMAND \
+  $SATISFACTORY_SERVER_QUERY_PORT \
+  &
+
 child=$!
 wait "$child"
 

@@ -9,7 +9,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       expect \
-      tcl && \
+      tcl \
+      libsdl2-2.0-0 && \
     rm -rf /var/lib/apt/lists/*
 
 # Create the volume directories
@@ -45,14 +46,13 @@ EXPOSE 15777/udp
 ENV SATISFACTORY_SERVER_STARTUP_ARGUMENTS "FactoryGame -log -NoSteamClient -unattended"
 ENV SATISFACTORY_BRANCH "experimental"
 ENV SATISFACTORY_START_MODE "0"
+ENV SATISFACTORY_SERVER_QUERY_PORT "15777"
 
 # Define directories to take ownership of
 ENV CHOWN_DIRS "/app,/steamcmd"
 
-## FIXME: How do we handle data persistence?
-
 # Expose the volumes
-# VOLUME [ "/steamcmd/satisfactory" ]
+VOLUME [ "/steamcmd/satisfactory", "/app/.config" ]
 
 # Start the server
 CMD [ "bash", "/app/start.sh"]
