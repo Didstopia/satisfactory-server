@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Enable debugging
-#set -x
+set -x
 
 # Print the user we're currently running as
 echo "Running as user: $(whoami)"
@@ -17,6 +17,13 @@ exit_handler()
 	echo "Exiting.."
 	exit
 }
+
+## TODO: Setup automatic updates, however note that the server automatically restarts
+##       if it's running for more than 24 hours, which will kick off the update process anyway.
+
+## TODO: Setup automatic backups + restore + rotation
+
+## TODO: Setup log rotation
 
 # Trap specific signals and forward to the exit handler
 trap 'exit_handler' SIGINT SIGTERM
@@ -55,7 +62,7 @@ if [ ! -z ${SATISFACTORY_BRANCH+x} ]; then
 	# Add "-beta" if necessary
 	INSTALL_BRANCH="${SATISFACTORY_BRANCH}"
 	if [ ! "$SATISFACTORY_BRANCH" == "public" ]; then
-	    INSTALL_BRANCH="-beta ${SATISFACTORY_BRANCH}"
+    INSTALL_BRANCH="-beta ${SATISFACTORY_BRANCH}"
 	fi
 	sed -i "s/app_update 1690800.*validate/app_update 1690800 $INSTALL_BRANCH validate/g" /app/install.txt
 else
@@ -83,6 +90,26 @@ fi
 # Remove extra whitespace from startup command
 SATISFACTORY_STARTUP_COMMAND=$(echo "$SATISFACTORY_SERVER_STARTUP_ARGUMENTS" | tr -s " ")
 
+# Add multihome option if enabled and not already set in startup command
+if [ ! -z ${SATISFACTORY_MULTIHOME+x} ] && [[ ! "${SATISFACTORY_STARTUP_COMMAND}" =~ "-multihome" ]]; then
+  SATISFACTORY_STARTUP_COMMAND="$SATISFACTORY_STARTUP_COMMAND -multihome=$SATISFACTORY_MULTIHOME"
+fi
+
+# Add server query port option if enabled and not already set in startup command
+if [ ! -z ${SATISFACTORY_SERVER_QUERY_PORT+x} ] && [[ ! "${SATISFACTORY_STARTUP_COMMAND}" =~ "-ServerQueryPort" ]]; then
+  SATISFACTORY_STARTUP_COMMAND="$SATISFACTORY_STARTUP_COMMAND -ServerQueryPort=$SATISFACTORY_SERVER_QUERY_PORT"
+fi
+
+# Add beacon port option if enabled and not already set in startup command
+if [ ! -z ${SATISFACTORY_BEACON_PORT+x} ] && [[ ! "${SATISFACTORY_STARTUP_COMMAND}" =~ "-BeaconPort" ]]; then
+  SATISFACTORY_STARTUP_COMMAND="$SATISFACTORY_STARTUP_COMMAND -BeaconPort=$SATISFACTORY_BEACON_PORT"
+fi
+
+# Add listen port option if enabled and not already set in startup command
+if [ ! -z ${SATISFACTORY_LISTEN_PORT+x} ] && [[ ! "${SATISFACTORY_STARTUP_COMMAND}" =~ "-Port" ]]; then
+  SATISFACTORY_STARTUP_COMMAND="$SATISFACTORY_STARTUP_COMMAND ?listen -Port=$SATISFACTORY_LISTEN_PORT"
+fi
+
 # Set the working directory
 cd /steamcmd/satisfactory
 
@@ -92,8 +119,12 @@ echo "Starting Satisfactory.."
   $SATISFACTORY_STARTUP_COMMAND \
   -ServerQueryPort=$SATISFACTORY_SERVER_QUERY_PORT &
 
+# Get the PID of the server
 child=$!
+
+# Wait until the server stops
 wait "$child"
 
-echo "Exiting.."
+echo "Server shutdown"
+
 exit

@@ -1,0 +1,17 @@
+services:
+  satisfactory-server:
+    image: didstopia/satisfactory-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777/udp"
+      - "15000:15000/udp"
+      - "15777:15777/udp"
+    volumes:
+      - satisfactory-data:/steamcmd/satisfactory:cached
+      - satisfactory-saves:/app/.config:cached
+
+volumes:
+  satisfactory-data:
+  satisfactory-saves:

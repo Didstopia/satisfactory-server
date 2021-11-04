@@ -14,6 +14,20 @@ For those who prefer it, as well as know how to deal with the persistence change
 
 ---
 
+## Known Issues
+
+Here you can find a list of known issues we're either actively working on or waiting for the developer to fix.  
+You will often also see one or more workarounds, until the issues are permanently fixed and confirmed working.
+
+**NOTE:** When applying workarounds, make sure to _only choose one_ option, in case multiple workarounds are available!
+
+- [ ] Server crashes on startup after 2021-11-03 update (developers added IPv6 support, which doesn't work on Linux)
+  - WORKAROUND #1: Add `-multihome=0.0.0.0` to the startup arguments, which forces it to bind to all available IPv4 addressses
+  - WORKAROUND #2: Pull the latest image, which now has `-multihome=0.0.0.0` added to the default server arguments via the new `SATISFACTORY_MULTIHOME` environment variable
+
+- [ ] `steamcmd` can crash with thread related exceptions (sometimes even hard crashes)
+  - WORKAROUND: Specifically use the tag `didstopia/satisfactory-server:18.04` instead
+
 ## Requirements
 
 - Linux
@@ -62,6 +76,18 @@ Mountable paths:
 
 Available environment variables:
 ```sh
+# Timezone
+# NOTE: Change this to correct timestamps in logs etc.
+TZ="Europe/Helsinki"
+
+# Default user ID
+# NOTE: Change this to match your host user to retain correct permissions
+PUID=1000
+
+# Default user group ID
+# NOTE: Change this to match your host user to retain correct permissions
+PGID=1000
+
 # Default server startup arguments
 SATISFACTORY_SERVER_STARTUP_ARGUMENTS="FactoryGame -log -NoSteamClient -unattended"
 
@@ -76,7 +102,21 @@ SATISFACTORY_BRANCH="experimental"
 # 2 - Skip update checks on startup and start the server
 SATISFACTORY_START_MODE="0"
 
+# Multihome binding (bind to specific IP address)
+# NOTE: Can be changed if hosting multiple instances on the same server
+SATISFACTORY_MULTIHOME="0.0.0.0"
+
 # Steam query port, same as the port used in-game
 # NOTE: Can be changed if hosting multiple instances on the same server
 SATISFACTORY_SERVER_QUERY_PORT="15777"
+
+# Beacon port
+# NOTE: Can be changed if hosting multiple instances on the same server
+# WARNING: Automatically incremented is unavailable
+SATISFACTORY_BEACON_PORT="15000"
+
+# Game port
+# NOTE: Can be changed if hosting multiple instances on the same server
+# WARNING: Automatically incremented is unavailable
+SATISFACTORY_LISTEN_PORT="7777"
 ```
