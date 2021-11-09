@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Enable debugging
-set -x
+# set -x
 
 # Print the user we're currently running as
 echo "Running as user: $(whoami)"
