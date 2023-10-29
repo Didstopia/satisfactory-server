@@ -72,7 +72,7 @@ fi
 # Disable auto-update if start mode is 2
 if [ "$SATISFACTORY_START_MODE" = "2" ]; then
 	# Check that Satisfactory exists in the first place
-	if [ ! -f "/steamcmd/satisfactory/Engine/Binaries/Linux/UE4Server-Linux-Shipping" ]; then
+	if [ ! -f "/steamcmd/satisfactory/Engine/Binaries/Linux/UnrealServer-Linux-Shipping" ]; then
 		install_or_update
 	else
 		echo "Satisfactory seems to be installed, skipping automatic update.."
