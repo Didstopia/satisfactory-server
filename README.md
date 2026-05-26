@@ -1,4 +1,4 @@
-[![Docker Automated build](https://img.shields.io/docker/automated/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server/)
+[![Build](https://github.com/Didstopia/satisfactory-server/actions/workflows/build.yml/badge.svg)](https://github.com/Didstopia/satisfactory-server/actions/workflows/build.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server/)
 [![Docker stars](https://img.shields.io/docker/stars/didstopia/satisfactory-server.svg)](https://hub.docker.com/r/didstopia/satisfactory-server)
 # Satisfactory Dedicated Server in a Docker Container
